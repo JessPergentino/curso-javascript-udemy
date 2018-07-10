@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Carregando JS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./js/js-head.js"></script>
+</head>
+<body>
+
+    <h1>Formas de Carregamento do JS - Aula 6</h1>
+    <p id="pDescricao"></p>
+    
+    <script src="./js/js-body.js"></script>
+    
+    <!-- Metodo externo fora do dominio -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    
+    <!-- Metodos Incorporados -->
+    <script>
+        $('#pDescricao').append('Essa aula teve o objetivo de exemplificar as formas de carregamento do JS')
+    </script>
+</body>
+</html>

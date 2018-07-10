@@ -1,0 +1,1 @@
+console.log("Código js carregado após o carregamento da pg html - melhor prática - metodos externos");

@@ -1,0 +1,1 @@
+console.log("Código js carregado no head - carrega antes da pg html - metodos externos");
