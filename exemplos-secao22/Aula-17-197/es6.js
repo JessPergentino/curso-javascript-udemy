@@ -171,3 +171,99 @@ console.log(map.clear());
 console.log(map.size);
 
 //WeakMap - Parte 1
+const weakMap = new WeakMap();
+
+let objeto1 = {teste1: "teste1"};
+let objeto2 = {teste2: "teste2"};
+let objeto3 = {teste3: "teste3"};
+let objeto4 = {teste4: "teste4"};
+
+//weakMap.set("chave1", "chave1"); - Não funciona, pois o weakSet só recebe objetos como cahve
+weakMap.set(objeto1, objeto1);
+weakMap.set(objeto2, "objeto2");
+weakMap.set(objeto3, objeto3);
+weakMap.set(objeto4, "objeto4");
+
+console.log(weakMap.get(objeto1));
+console.log(weakMap.get(objeto2));
+console.log(weakMap.get(objeto3));
+console.log(weakMap.get(objeto4));
+
+objeto1 = null;
+console.log(weakMap.get(objeto1));
+
+console.log(weakMap.has(objeto2));
+console.log(weakMap.has("Qual quer chave"));
+console.log(weakMap.delete(objeto2));
+console.log(weakMap.delete("Chave inexistente"));
+
+//Set
+const set = new Set();
+
+set.add("Jessica");
+set.add(123456);
+set.add(true);
+set.add([1,2,3,4,5]);
+set.add({teste: "teste1"});
+set.add(new Map().set("chave","valor"));
+console.log(set.add(4));
+
+console.log(set.size);
+
+console.log(set.delete("Jessica"));
+console.log(set.delete(200));
+console.log(set.size);
+
+console.log(set.has(true));
+console.log(set.has("João"));
+
+set.add("Jessica");
+set.add(123456);
+set.add(true);
+console.log(set);
+
+set.forEach(function(valor,chave,set){
+    console.log(chave,"-",valor);
+});
+
+for(let [chave,valor] of set.entries()){
+    console.log(chave,"-",valor);
+}
+
+console.log(set.values());
+console.log(set.clear());
+console.log(set.size);
+
+//WeakSet
+const weakSet = new WeakSet();
+
+let obj1 = {teste: "teste1"};
+let obj2 = {teste: "teste2"};
+let obj3 = {teste: "teste3"};
+let obj4 = {teste: "teste4"};
+
+weakMap.add(obj1);
+weakMap.add(obj2);
+weakMap.add(obj3);
+
+console.log(weakMap.has(obj1));
+console.log(weakMap.has(obj2));
+console.log(weakMap.has(obj3));
+console.log(weakMap.has(obj4));
+
+obj1 = null;
+
+console.log(weakMap.has(obj1));
+console.log(weakMap.has(obj2));
+console.log(weakMap.has(obj3));
+console.log(weakMap.has(obj4));
+
+console.log(weakMap.delete(obj3));
+console.log(weakMap.delete(obj4));
+
+console.log(weakMap.has(obj1));
+console.log(weakMap.has(obj2));
+console.log(weakMap.has(obj3));
+console.log(weakMap.has(obj4));
+
+//Spread
