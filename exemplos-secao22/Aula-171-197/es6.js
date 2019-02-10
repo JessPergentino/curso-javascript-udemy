@@ -242,28 +242,88 @@ let obj2 = {teste: "teste2"};
 let obj3 = {teste: "teste3"};
 let obj4 = {teste: "teste4"};
 
-weakMap.add(obj1);
-weakMap.add(obj2);
-weakMap.add(obj3);
+weakSet.add(obj1);
+weakSet.add(obj2);
+weakSet.add(obj3);
 
-console.log(weakMap.has(obj1));
-console.log(weakMap.has(obj2));
-console.log(weakMap.has(obj3));
-console.log(weakMap.has(obj4));
+console.log(weakSet.has(obj1));
+console.log(weakSet.has(obj2));
+console.log(weakSet.has(obj3));
+console.log(weakSet.has(obj4));
 
 obj1 = null;
 
-console.log(weakMap.has(obj1));
-console.log(weakMap.has(obj2));
-console.log(weakMap.has(obj3));
-console.log(weakMap.has(obj4));
+console.log(weakSet.has(obj1));
+console.log(weakSet.has(obj2));
+console.log(weakSet.has(obj3));
+console.log(weakSet.has(obj4));
 
-console.log(weakMap.delete(obj3));
-console.log(weakMap.delete(obj4));
+console.log(weakSet.delete(obj3));
+console.log(weakSet.delete(obj4));
 
-console.log(weakMap.has(obj1));
-console.log(weakMap.has(obj2));
-console.log(weakMap.has(obj3));
-console.log(weakMap.has(obj4));
+console.log(weakSet.has(obj1));
+console.log(weakSet.has(obj2));
+console.log(weakSet.has(obj3));
+console.log(weakSet.has(obj4));
 
 //Spread
+function somarNumeros(a,b,c,d){
+    console.log(a,b,c,d);
+}
+
+let arrayNumeros = [1,2,3,4,5,6,7,8,9];
+
+somarNumeros(arrayNumeros[0],arrayNumeros[1],arrayNumeros[2],arrayNumeros[3]);
+
+somarNumeros.apply(null,arrayNumeros);
+
+somarNumeros(...arrayNumeros);
+
+let arrayLetras = [a,b,c,d];
+let arrayNumeros1 = [4,5,6,7,8];
+let arrayNumeros2 = [13,14,15];
+
+let retornoConcatenacao = arrayLetras.concat(arrayNumeros1,arrayNumeros2);
+console.log(retornoConcatenacao);
+
+let retornoConcatenacaoSpread = [...arrayLetras, ...arrayNumeros1, ...arrayNumeros2];
+console.log(retornoConcatenacaoSpread);
+
+let arrayTodosNumeros = [1,2,3,...arrayNumeros1,9,10,11,12,...arrayNumeros2,16,17,18,19,20];
+console.log(arrayTodosNumeros);
+
+arrayTodosNumeros.push(...[21,22,23,24]);
+
+//Rest Parameter
+mostrarNomeCompleto("Jessica", "das", "Neves", "Pergentino");
+//Sem o rest parameter
+function mostrarNomeCompleto(){
+console.log(arguments.length);
+let nomeCompleto = "";
+Array.prototype.forEach.call(arguments, function(valor){
+nomeCompleto += " " + valor;
+console.log(nomeCompleto);
+});
+}
+
+//Sem o rest parameter
+function mostrarNomeCompleto2(...nomes){
+console.log(nomes.length);
+let nomeCompleto = "";
+nomes.forEach(function(valor){
+nomeCompleto += " " + valor;
+console.log(nomeCompleto);
+});
+}
+mostrarNomeCompleto2("Jessica", "das", "Neves", "Pergentino");
+
+//Rest Parameter com Spread
+function somarNumeros(...operandos){
+    let retornoSoma = operandos.reduce(function(acumulado, valor, indice, array){
+        return acumulado = acumulado + valor;
+    })
+    console.log(retornoSoma);
+}
+
+let arraySoma = [2,8,4,12];
+somarNumeros(...arraySoma);
