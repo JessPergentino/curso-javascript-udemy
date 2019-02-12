@@ -279,7 +279,7 @@ somarNumeros.apply(null,arrayNumeros);
 
 somarNumeros(...arrayNumeros);
 
-let arrayLetras = [a,b,c,d];
+let arrayLetras = ["a","b","c","d"];
 let arrayNumeros1 = [4,5,6,7,8];
 let arrayNumeros2 = [13,14,15];
 
@@ -327,3 +327,121 @@ function somarNumeros(...operandos){
 
 let arraySoma = [2,8,4,12];
 somarNumeros(...arraySoma);
+
+//Default Parameters
+function exibirMsgSaudacao(nome){
+    let msg = "Seja bem vindo" + nome + "!";
+    console.log(msg);
+}
+exibirMsgSaudacao("Jessica");
+exibirMsgSaudacao();
+
+function exibirMsgSaudacaoES5(nome){
+    let msg = "Seja bem vindo" + nome + "!";
+    if(nome == undefined){
+        msg = "Seja bem vindo Cliente";
+    }
+    console.log(msg);
+}
+
+function exibirMsgSaudacaoES5OutraForma(nome){
+    nome = nome || "cliente";
+    let msg = "Seja bem vindo" + nome + "!";
+    console.log(msg);
+}
+
+function exibirMsgSaudacaoES6(nome = "Cliente"){
+    let msg = "Seja bem vindo" + nome + "!";
+    console.log(msg);
+}
+
+let padrao = "default"
+function exibir(mensagem = padrao){
+console.log(mensagem);
+}
+
+exibir("Sou uma mensagem com valor");
+exibir();
+
+function fn(nome = "cliente", sobrenome = nome){
+    console.log("Olá " + nome);
+    console.log("Obrigado, " + sobrenome + "!.");
+}
+fn();
+fn("Jessica");
+fn("Jessica","Pergentino");
+
+function elevarNumero(valor = 0, base = function(){return 2}){
+    console.log(Math.pow(valor, base));
+}
+
+elevarNumero(8,2);
+elevarNumero(5);
+
+//Template String
+let texto = "Está mensagem possui uma \n Quebra de linha";
+console.log(texto);
+
+let textoTemplate = `Está mensagem possui uma
+Quebra de linha`;
+console.log(textoTemplate);
+
+let expressao = " 5 + 5 = " + (5 + 5) + "10 * 4 = " + (10*4) + ".";
+console.log(expressao);
+
+let expressaoTemplate = ` 5 + 5 = ${5+5} 10 * 4 = ${10*4}.`;
+console.log(expressaoTemplate);
+
+let pessoa = {nome: "João", idade: 46};
+let apresentacao = "Olá eu sou " + pessoa.nome + " e tenho " + pessoa.idade + " anos!.";
+console.log(apresentacao);
+
+let apresentacaoTemplate = `Olá eu sou ${pessoa.nome} e eu tenho ${pessoa.idade} anos!.`;
+console.log(apresentacaoTemplate);
+
+//Tagged Template String
+let nome = "Demetrius";
+let sobrenome = "Batista";
+console.log(`Olá ${nome} seu sobrenome é ${sobrenome}?`);
+
+function caixaAlta(arrayTemplate, ...arrayValores){
+    console.log(arrayTemplate);
+    console.log(arrayValores);
+    let str = "";
+
+    arrayTemplate.forEach(function(texto,indice,array){
+        str += `${texto} ${arrayValores[indice] != undefined ? arrayValores[indice].toUpperCase() : ""}`;
+        return str;
+    })
+
+    console.log(caixaAlta`Olá ${nome} seu sobrenome é ${sobrenome}?`);
+}
+
+//Arrow Function
+//função tradicional
+function somar(a,b){
+    return a + b;
+}
+console.log(somar(54,21));
+
+//Expressão
+let somarEx = function(a,b){
+    return a + b;
+}
+console.log(somarEx);
+console.log(somarEx(10,20));
+
+//Versionamento arrow function
+const somarArrowV1 = (a,b) => {
+    return a + b;
+}
+console.log(somarArrowV1(10,20));
+
+const somarArrowV2 = (a,b) => a + b;
+console.log(somarArrowV2(10,20));
+
+const arrowCompact = nome => nome.toUpperCase(); // Função só com um parametro
+console.log(arrowCompact("Jessica"));
+
+const arrow = () => "Olá"; // Função sem parametro
+console.log(arrow());
