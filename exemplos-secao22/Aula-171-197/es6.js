@@ -1,6 +1,6 @@
 // varável let
 var escopoGlobal = "Escopo Global";
-function fn(){
+function fn() {
     var escopoLocal = "Escopo Local da Função fn";
     escopoLocal2 = "Escopo Local da função fn 2";
 }
@@ -8,7 +8,7 @@ fn(); // escopoLocal2 apesar de ser definida dentro da função, é de escopo gl
 console.log(escopoGlobal);
 // Não irá funcionar pois a variavel é de escopo local console.log(escopoLocal);
 console.log(escopoLocal2); // Ela é definida na função e por não ter modificador sofre hosting e é colocada no escopo local
-if(true){
+if (true) {
     //var localBloco = "Variável no escopo de bloco"; //Funcionará, porém é uma má prática usar variáveis de escopo de bloco com o modificador var - usar sempre let
     let localBloco = "Variável no escopo de bloco"; // Boa prática
 }
@@ -20,7 +20,7 @@ console.log(nome);//Funciona, pois é um var
 
 let idade = 32;
 //let idade = 65; //Não pode declarar um let com o mesmo nome duas vezes; - TDZ
-console.log(idade); 
+console.log(idade);
 console.log(produto);
 var produto = "Sofri hosting";
 
@@ -61,8 +61,8 @@ Por ser uma constante não é possivel atribuir outro valor;
 pessoa.nome = "João Snow"; // é possivel alterar as propriedades, mas não o objeto
 console.log(pessoa);
 
-Object.defineProperties(pessoa,{
-    "nome": {writable: false} //Caso queira que alguma propriedade não possa ser modificada
+Object.defineProperties(pessoa, {
+    "nome": { writable: false } //Caso queira que alguma propriedade não possa ser modificada
 })
 pessoa.nome = "Demetrius";
 console.log(pessoa);
@@ -75,11 +75,11 @@ console.log(pessoa);
 var nome = "Jessica",
     numero = 21,
     ativo = true,
-    itens = ["prod1","prod2","prod3"],
-    funcao = function(){
+    itens = ["prod1", "prod2", "prod3"],
+    funcao = function () {
         console.log("Sou uma função");
     },
-    objeto = {nome: "pessoa", cpf:"21352132"},
+    objeto = { nome: "pessoa", cpf: "21352132" },
     expRegular = /teste/gi;
 //Declarar um map
 const map = new Map();
@@ -124,8 +124,8 @@ console.log(retorno);
 console.log(map.delete(123));
 console.log(map.delete("chave q nao existe"));
 //Iteração sobre o map
-map.forEach(function(valor,chave,map){
-    console.log(chave,"-",valor);
+map.forEach(function (valor, chave, map) {
+    console.log(chave, "-", valor);
 })
 //Verificando uma chave
 console.log(map.has(funcao));
@@ -142,8 +142,8 @@ console.log(typeof chaves);
 console.log(chaves.next());
 console.log(chaves.next().value);
 let chave = undefined;
-while((chave = chaves.next().value)){
-    console.log("Chave -",chave);
+while ((chave = chaves.next().value)) {
+    console.log("Chave -", chave);
 }
 
 let valores = map.values();
@@ -152,8 +152,8 @@ console.log(typeof valores);
 console.log(valores.next());
 console.log(valores.next().value);
 let valor = undefined;
-while((valor = valores.next().value)){
-    console.log("valor -",valor);
+while ((valor = valores.next().value)) {
+    console.log("valor -", valor);
 }
 
 let chavesValores = map.entries();
@@ -162,8 +162,8 @@ console.log(typeof chavesValores);
 console.log(chavesValores.next());
 console.log(chavesValores.next().value);
 let chaveValor = undefined;
-while((chaveValor = chavesValores.next().value)){
-    console.log("chaveValor -",chaveValor);
+while ((chaveValor = chavesValores.next().value)) {
+    console.log("chaveValor -", chaveValor);
 }
 
 //Limpar o map
@@ -173,10 +173,10 @@ console.log(map.size);
 //WeakMap - Parte 1
 const weakMap = new WeakMap();
 
-let objeto1 = {teste1: "teste1"};
-let objeto2 = {teste2: "teste2"};
-let objeto3 = {teste3: "teste3"};
-let objeto4 = {teste4: "teste4"};
+let objeto1 = { teste1: "teste1" };
+let objeto2 = { teste2: "teste2" };
+let objeto3 = { teste3: "teste3" };
+let objeto4 = { teste4: "teste4" };
 
 //weakMap.set("chave1", "chave1"); - Não funciona, pois o weakSet só recebe objetos como cahve
 weakMap.set(objeto1, objeto1);
@@ -203,9 +203,9 @@ const set = new Set();
 set.add("Jessica");
 set.add(123456);
 set.add(true);
-set.add([1,2,3,4,5]);
-set.add({teste: "teste1"});
-set.add(new Map().set("chave","valor"));
+set.add([1, 2, 3, 4, 5]);
+set.add({ teste: "teste1" });
+set.add(new Map().set("chave", "valor"));
 console.log(set.add(4));
 
 console.log(set.size);
@@ -222,12 +222,12 @@ set.add(123456);
 set.add(true);
 console.log(set);
 
-set.forEach(function(valor,chave,set){
-    console.log(chave,"-",valor);
+set.forEach(function (valor, chave, set) {
+    console.log(chave, "-", valor);
 });
 
-for(let [chave,valor] of set.entries()){
-    console.log(chave,"-",valor);
+for (let [chave, valor] of set.entries()) {
+    console.log(chave, "-", valor);
 }
 
 console.log(set.values());
@@ -237,10 +237,10 @@ console.log(set.size);
 //WeakSet
 const weakSet = new WeakSet();
 
-let obj1 = {teste: "teste1"};
-let obj2 = {teste: "teste2"};
-let obj3 = {teste: "teste3"};
-let obj4 = {teste: "teste4"};
+let obj1 = { teste: "teste1" };
+let obj2 = { teste: "teste2" };
+let obj3 = { teste: "teste3" };
+let obj4 = { teste: "teste4" };
 
 weakSet.add(obj1);
 weakSet.add(obj2);
@@ -267,115 +267,115 @@ console.log(weakSet.has(obj3));
 console.log(weakSet.has(obj4));
 
 //Spread
-function somarNumeros(a,b,c,d){
-    console.log(a,b,c,d);
+function somarNumeros(a, b, c, d) {
+    console.log(a, b, c, d);
 }
 
-let arrayNumeros = [1,2,3,4,5,6,7,8,9];
+let arrayNumeros = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-somarNumeros(arrayNumeros[0],arrayNumeros[1],arrayNumeros[2],arrayNumeros[3]);
+somarNumeros(arrayNumeros[0], arrayNumeros[1], arrayNumeros[2], arrayNumeros[3]);
 
-somarNumeros.apply(null,arrayNumeros);
+somarNumeros.apply(null, arrayNumeros);
 
 somarNumeros(...arrayNumeros);
 
-let arrayLetras = ["a","b","c","d"];
-let arrayNumeros1 = [4,5,6,7,8];
-let arrayNumeros2 = [13,14,15];
+let arrayLetras = ["a", "b", "c", "d"];
+let arrayNumeros1 = [4, 5, 6, 7, 8];
+let arrayNumeros2 = [13, 14, 15];
 
-let retornoConcatenacao = arrayLetras.concat(arrayNumeros1,arrayNumeros2);
+let retornoConcatenacao = arrayLetras.concat(arrayNumeros1, arrayNumeros2);
 console.log(retornoConcatenacao);
 
 let retornoConcatenacaoSpread = [...arrayLetras, ...arrayNumeros1, ...arrayNumeros2];
 console.log(retornoConcatenacaoSpread);
 
-let arrayTodosNumeros = [1,2,3,...arrayNumeros1,9,10,11,12,...arrayNumeros2,16,17,18,19,20];
+let arrayTodosNumeros = [1, 2, 3, ...arrayNumeros1, 9, 10, 11, 12, ...arrayNumeros2, 16, 17, 18, 19, 20];
 console.log(arrayTodosNumeros);
 
-arrayTodosNumeros.push(...[21,22,23,24]);
+arrayTodosNumeros.push(...[21, 22, 23, 24]);
 
 //Rest Parameter
 mostrarNomeCompleto("Jessica", "das", "Neves", "Pergentino");
 //Sem o rest parameter
-function mostrarNomeCompleto(){
-console.log(arguments.length);
-let nomeCompleto = "";
-Array.prototype.forEach.call(arguments, function(valor){
-nomeCompleto += " " + valor;
-console.log(nomeCompleto);
-});
+function mostrarNomeCompleto() {
+    console.log(arguments.length);
+    let nomeCompleto = "";
+    Array.prototype.forEach.call(arguments, function (valor) {
+        nomeCompleto += " " + valor;
+        console.log(nomeCompleto);
+    });
 }
 
 //Sem o rest parameter
-function mostrarNomeCompleto2(...nomes){
-console.log(nomes.length);
-let nomeCompleto = "";
-nomes.forEach(function(valor){
-nomeCompleto += " " + valor;
-console.log(nomeCompleto);
-});
+function mostrarNomeCompleto2(...nomes) {
+    console.log(nomes.length);
+    let nomeCompleto = "";
+    nomes.forEach(function (valor) {
+        nomeCompleto += " " + valor;
+        console.log(nomeCompleto);
+    });
 }
 mostrarNomeCompleto2("Jessica", "das", "Neves", "Pergentino");
 
 //Rest Parameter com Spread
-function somarNumeros(...operandos){
-    let retornoSoma = operandos.reduce(function(acumulado, valor, indice, array){
+function somarNumeros(...operandos) {
+    let retornoSoma = operandos.reduce(function (acumulado, valor, indice, array) {
         return acumulado = acumulado + valor;
     })
     console.log(retornoSoma);
 }
 
-let arraySoma = [2,8,4,12];
+let arraySoma = [2, 8, 4, 12];
 somarNumeros(...arraySoma);
 
 //Default Parameters
-function exibirMsgSaudacao(nome){
+function exibirMsgSaudacao(nome) {
     let msg = "Seja bem vindo" + nome + "!";
     console.log(msg);
 }
 exibirMsgSaudacao("Jessica");
 exibirMsgSaudacao();
 
-function exibirMsgSaudacaoES5(nome){
+function exibirMsgSaudacaoES5(nome) {
     let msg = "Seja bem vindo" + nome + "!";
-    if(nome == undefined){
+    if (nome == undefined) {
         msg = "Seja bem vindo Cliente";
     }
     console.log(msg);
 }
 
-function exibirMsgSaudacaoES5OutraForma(nome){
+function exibirMsgSaudacaoES5OutraForma(nome) {
     nome = nome || "cliente";
     let msg = "Seja bem vindo" + nome + "!";
     console.log(msg);
 }
 
-function exibirMsgSaudacaoES6(nome = "Cliente"){
+function exibirMsgSaudacaoES6(nome = "Cliente") {
     let msg = "Seja bem vindo" + nome + "!";
     console.log(msg);
 }
 
 let padrao = "default"
-function exibir(mensagem = padrao){
-console.log(mensagem);
+function exibir(mensagem = padrao) {
+    console.log(mensagem);
 }
 
 exibir("Sou uma mensagem com valor");
 exibir();
 
-function fn(nome = "cliente", sobrenome = nome){
+function fn(nome = "cliente", sobrenome = nome) {
     console.log("Olá " + nome);
     console.log("Obrigado, " + sobrenome + "!.");
 }
 fn();
 fn("Jessica");
-fn("Jessica","Pergentino");
+fn("Jessica", "Pergentino");
 
-function elevarNumero(valor = 0, base = function(){return 2}){
+function elevarNumero(valor = 0, base = function () { return 2 }) {
     console.log(Math.pow(valor, base));
 }
 
-elevarNumero(8,2);
+elevarNumero(8, 2);
 elevarNumero(5);
 
 //Template String
@@ -386,13 +386,13 @@ let textoTemplate = `Está mensagem possui uma
 Quebra de linha`;
 console.log(textoTemplate);
 
-let expressao = " 5 + 5 = " + (5 + 5) + "10 * 4 = " + (10*4) + ".";
+let expressao = " 5 + 5 = " + (5 + 5) + "10 * 4 = " + (10 * 4) + ".";
 console.log(expressao);
 
-let expressaoTemplate = ` 5 + 5 = ${5+5} 10 * 4 = ${10*4}.`;
+let expressaoTemplate = ` 5 + 5 = ${5 + 5} 10 * 4 = ${10 * 4}.`;
 console.log(expressaoTemplate);
 
-let pessoa = {nome: "João", idade: 46};
+let pessoa = { nome: "João", idade: 46 };
 let apresentacao = "Olá eu sou " + pessoa.nome + " e tenho " + pessoa.idade + " anos!.";
 console.log(apresentacao);
 
@@ -404,12 +404,12 @@ let nome = "Demetrius";
 let sobrenome = "Batista";
 console.log(`Olá ${nome} seu sobrenome é ${sobrenome}?`);
 
-function caixaAlta(arrayTemplate, ...arrayValores){
+function caixaAlta(arrayTemplate, ...arrayValores) {
     console.log(arrayTemplate);
     console.log(arrayValores);
     let str = "";
 
-    arrayTemplate.forEach(function(texto,indice,array){
+    arrayTemplate.forEach(function (texto, indice, array) {
         str += `${texto} ${arrayValores[indice] != undefined ? arrayValores[indice].toUpperCase() : ""}`;
         return str;
     })
@@ -419,29 +419,154 @@ function caixaAlta(arrayTemplate, ...arrayValores){
 
 //Arrow Function
 //função tradicional
-function somar(a,b){
+function somar(a, b) {
     return a + b;
 }
-console.log(somar(54,21));
+console.log(somar(54, 21));
 
 //Expressão
-let somarEx = function(a,b){
+let somarEx = function (a, b) {
     return a + b;
 }
 console.log(somarEx);
-console.log(somarEx(10,20));
+console.log(somarEx(10, 20));
 
 //Versionamento arrow function
-const somarArrowV1 = (a,b) => {
+const somarArrowV1 = (a, b) => {
     return a + b;
 }
-console.log(somarArrowV1(10,20));
+console.log(somarArrowV1(10, 20));
 
-const somarArrowV2 = (a,b) => a + b;
-console.log(somarArrowV2(10,20));
+const somarArrowV2 = (a, b) => a + b;
+console.log(somarArrowV2(10, 20));
 
 const arrowCompact = nome => nome.toUpperCase(); // Função só com um parametro
 console.log(arrowCompact("Jessica"));
 
 const arrow = () => "Olá"; // Função sem parametro
 console.log(arrow());
+
+//Arrow Function - this lexico callback - Executar direto no console do browser
+function Livro() {
+    this.paginaAtual = 0;
+
+    setInterval(function passarPagina() {
+        this.paginaAtual++;
+        console.log("This:", this);
+        console.log("Pagina Atual:", this.paginaAtual);
+    }, 1000);
+}
+let livro1 = new Livro();
+
+//That - self ESC5 - Executar direto no console do browser
+function Livro2() {
+    this.paginaAtual = 0;
+    let that = this;
+
+    setInterval(function passarPagina() {
+        that.paginaAtual++;
+        console.log("This:", that);
+        console.log("Pagina Atual:", that.paginaAtual);
+    }, 1000);
+}
+let livro2 = new Livro2();
+
+//Arrow Function - Executar direto no console do browser
+function Livro3() {
+    this.paginaAtual = 0;
+
+    setInterval(() => {
+        this.paginaAtual++;
+        console.log("This:", this);
+        console.log("Pagina Atual:", this.paginaAtual);
+    }, 1000);
+}
+let livro3 = new Livro2();
+
+//Arrow function this lexico objeto
+
+/* Sem arrow function - escopo botão
+let btn1 = document.getElementById("btn1");
+btn1.addEventListener("click", function(){
+    console.log("this", this);
+}, false);
+*/
+//Escopo window
+let btn1 = document.getElementById("btn1");
+btn1.addEventListener("click", function () {
+    console.log("this", this);
+}.bind(this), false);
+
+//Com arrow function - escopo window
+let btn2 = document.getElementById("btn2");
+btn2.addEventListener("click", () => {
+    console.log("this", this);
+}, false);
+
+function Pessoa() {
+    this.nome;
+
+    // Escopo do botão
+    this.cadastrarEventoHtmlFn = function () {
+        let btn3 = document.getElementById("btn3");
+        btn3.addEventListener("click", function() {
+            console.log("this", this);
+        }, false);
+    }
+
+    // Escopo do objeto - Pessoa
+    this.cadastrarEventoHtmlArrow = function () {
+        let btn4 = document.getElementById("btn4");
+        btn4.addEventListener("click", () => {
+            console.log("this", this);
+        }, false);
+    }
+}
+
+let pessoa = new Pessoa();
+pessoa.cadastrarEventoHtmlFn();
+pessoa.cadastrarEventoHtmlArrow();
+
+//Shothand property - Abriviação de variável
+let nome = "Jessica", idade=25, cidade="São Paulo";
+
+//ES5
+let objPessoaES5 = {nome:nome,idade:idade,cidade:cidade};
+console.log("Objeto",objPessoaES5);
+
+//ES6
+let objPessoaES6 = {nome,idade,cidade};
+console.log("Objeto",objPessoaES6);
+
+//Shothand Method - Abriviação de metodo
+
+//ES5
+objCalcES5 = {
+    msg: function msg(){
+        console.log("Olá");
+    },
+    somar: function somar(a,b){
+        return console.log(a + b);
+    }
+}
+
+objCalcES5.msg();
+objCalcES5.somar(10,25);
+
+//ES6
+objCalcES6 = {
+    msg(){
+        console.log("Olá");
+    },
+    somar(a,b){
+        return console.log(a + b);
+    },
+    *funcaoGeradora(i){
+        yield i + 1;
+    }
+}
+
+objCalcES6.msg();
+objCalcES6.somar(15,65);
+console.log(objCalcES6.funcaoGeradora(1).next().value);
+
