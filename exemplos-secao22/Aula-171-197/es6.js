@@ -392,11 +392,11 @@ console.log(expressao);
 let expressaoTemplate = ` 5 + 5 = ${5 + 5} 10 * 4 = ${10 * 4}.`;
 console.log(expressaoTemplate);
 
-let pessoa = { nome: "João", idade: 46 };
-let apresentacao = "Olá eu sou " + pessoa.nome + " e tenho " + pessoa.idade + " anos!.";
+let pessoa1 = { nome: "João", idade: 46 };
+let apresentacao = "Olá eu sou " + pessoa1.nome + " e tenho " + pessoa1.idade + " anos!.";
 console.log(apresentacao);
 
-let apresentacaoTemplate = `Olá eu sou ${pessoa.nome} e eu tenho ${pessoa.idade} anos!.`;
+let apresentacaoTemplate = `Olá eu sou ${pessoa1.nome} e eu tenho ${pessoa1.idade} anos!.`;
 console.log(apresentacaoTemplate);
 
 //Tagged Template String
@@ -523,9 +523,9 @@ function Pessoa() {
     }
 }
 
-let pessoa = new Pessoa();
-pessoa.cadastrarEventoHtmlFn();
-pessoa.cadastrarEventoHtmlArrow();
+let pessoa2 = new Pessoa();
+pessoa2.cadastrarEventoHtmlFn();
+pessoa2.cadastrarEventoHtmlArrow();
 
 //Shothand property - Abriviação de variável
 let nome = "Jessica", idade=25, cidade="São Paulo";
@@ -570,3 +570,142 @@ objCalcES6.msg();
 objCalcES6.somar(15,65);
 console.log(objCalcES6.funcaoGeradora(1).next().value);
 
+//Propriedades ou Métodos Computadas
+//ES5
+var objProdutoES5 = {
+    nome: "A"
+}
+objProdutoES5["seq" + 23] = 23;
+console.log(objProdutoES5);
+
+//ES6
+var objProdutoES6 = {
+    nome: "B",
+    ["seq" + 12]: 12
+}
+console.log(objProdutoES6);
+
+let retNum = function(){
+    return 268;
+}
+
+let nomeProp = "teste";
+var objPessoaES6v2 = {
+    nome: "c",
+    ["seq" + retNum()] : retNum(),
+    [nomeProp]: nomeProp
+}
+
+//Destructuring - Objeto
+let objPessoa = {
+    nome: "Jessica",
+    idade: 23,
+    email: "email@email.com",
+    sexo: "F",
+    telefone: "13246589",
+    endereco: {rua: "Rua",numero:001,cidade:"Cidade",estado:"Estado"},
+    site: undefined,
+}
+
+//ES5
+var telefone = objPessoa.telefone;
+var email = objPessoa.email;
+console.log(email + " - " + telefone);
+
+//ES6
+let {nome, idade} = objPessoa; //nomes das propriedades que serão extraidas do objeto
+console.log(`Nome: ${nome} - idade: ${idade}`);
+
+let {salario} = objPessoa;
+console.log(`Salario: ${salario}`);
+
+//Rotulo - extrair propriedade com outro nome
+let{nome:nomeComp, telefone:celular} = objPessoa;
+console.log(`${nomeComp} - ${celular}`);
+
+let {rua,numero,cidade,estado} = objPessoa.endereco;
+console.log(rua,numero,cidade,estado);
+
+let {endereco:{rua,numero,cidade,estado}} = objPessoa;
+console.log(rua,numero,cidade,estado);
+
+//Valor Padrão
+let {escola,pais,site} = objPessoa;
+console.log(escola,pais="Brasil",site="site.com");
+
+//Destructuring - Argumento
+let objProd = {descricao: "Livro Js", preco: 89.56, pags:536};
+let objCliente = {nome};
+
+function venda({nome}, {descricao, preco,pags: paginas}, qtd = 1){
+    console.log(`
+        Cliente: ${nome}.
+        Produto: ${descricao}. - Páginas: ${paginas}
+        Quantidade: ${qtd}.
+        Preço: ${preco}.
+        Total: R$ ${qtd * preco}.
+    `);
+}
+venda(objCliente, objProd);
+
+//Destructu - array
+let array = [1,2,3,4,5,6,7,8,9,10,11];
+let [um,dois,tres,,,,,,sete,oito,nove,,onze];
+console.log(um,dois,tres,sete,oito,nove,onze);
+
+let pessoas = [
+    {nome: "Maria1", telefone: "465978132"},
+    {nome: "Maria2", telefone: "465132123"},
+    {nome: "Maria3", telefone: "465971324"},
+    {nome: "Maria4", telefone: "987528132"},
+];
+
+let [,{nome,telefone}] = pessoas;
+console.log(`Nome: ${nome} - Telefone: ${telefone}`);
+
+//Inverter valores
+let x = 25;
+let y = 37;
+[x,y] = [y,x];
+console.log(x,y);
+
+//Classes - ES5 e ES6
+//ES5 - Definição da classe
+function PessoaES5(nome, cpf){//construtor
+    //propriedades
+    this.nome = nome;
+    this.cpf = cpf;
+}
+
+//Métodos - utilizar o prototype para que possa ser usado pelas instancias
+PessoaES5.prototype.nomeUpper = function(){
+    return this.nome.toUpperCase();
+}
+//Instancia Objeto ES5
+var objetoPessoaES51 = new PessoaES5("Jessica", "213564894561");
+var objetoPessoaES52 = new PessoaES5("Demetrius", "213532164987");
+console.log(objetoPessoaES51);
+console.log(objetoPessoaES52);
+console.log(objetoPessoaES51.nomeUpper());
+console.log(objetoPessoaES52.nomeUpper());
+
+//ES6 - Definição da Classe
+class PessoaES6{
+    constructor(nome,cpf){ //Construtor
+        //propriedades
+        this.nome = nome;
+        this.cpf = cpf;
+    }
+    nomeUpper(){
+        return this.nome.toUpperCase();
+    }
+}
+
+var objetoPessoaES61 = new PessoaES6("Maria", "213564894561");
+var objetoPessoaES62 = new PessoaES6("João", "213532164987");
+console.log(objetoPessoaES61);
+console.log(objetoPessoaES62);
+console.log(objetoPessoaES61.nomeUpper());
+console.log(objetoPessoaES62.nomeUpper());
+
+//Herança
