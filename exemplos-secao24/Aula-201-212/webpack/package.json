@@ -1,0 +1,16 @@
+{
+  "name": "app-webpack",
+  "version": "1.0.0",
+  "description": "Teste com webpack",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development --watch",
+    "build": "webpack --mode production"
+  },
+  "author": "Jessica Pergentino",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
+  }
+}
