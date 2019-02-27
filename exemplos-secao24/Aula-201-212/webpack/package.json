@@ -4,12 +4,15 @@
   "description": "Teste com webpack",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development --watch",
+    "dev": "webpack --mode development",
     "build": "webpack --mode production"
   },
   "author": "Jessica Pergentino",
   "license": "ISC",
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.5",
+    "babel-preset-env": "^1.7.0",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
   }
