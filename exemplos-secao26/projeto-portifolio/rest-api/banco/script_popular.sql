@@ -1,0 +1,2 @@
+INSERT INTO Portifolio (descricao,detalhes) values ('Desenvolvimento de Websites','Tecnologias JS, NODE, Express e PostgresSql');
+INSERT INTO Portifolio (descricao,detalhes) values ('Desenvolvimento de APIs','Tecnologias JS, NODE, Express e PostgresSql');
