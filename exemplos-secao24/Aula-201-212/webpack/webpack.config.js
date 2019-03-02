@@ -1,11 +1,31 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
-    entry: ["babel-polyfill", './src/index.js'],
+    entry: {
+        babelpolyfill: "babel-polyfill",
+        index: './src/index.js'
+    },
     output: {
-        path: path.resolve(__dirname, "dist"),
-        filename: "bundle.js"
+        path: path.resolve(__dirname, "dist/bundle"),
+        filename: "[name].bundle.js"
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all'
+        },
+        minimizer: [
+            new UglifyJsPlugin({
+                uglifyOptions: {
+                    output: {
+                        comments: false
+                    }
+                }
+            }),
+            new OptimizeCSSAssetsPlugin({})
+        ]
     },
     plugins: [
         new MiniCssExtractPlugin({
@@ -19,7 +39,7 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     { loader: MiniCssExtractPlugin.loader }, //usado no lugar de style-loader
-                    { loader: "file-loader" }
+                    { loader: "css-loader" }
                 ]
             },
             //Configuração para usar o bootstrap com sass
@@ -34,6 +54,7 @@ module.exports = {
                     options: {
                         plugins: function () { // postcss plugins, can be exported to postcss.config.js
                             return [
+                                require('precss'),
                                 require('autoprefixer')
                             ];
                         }
