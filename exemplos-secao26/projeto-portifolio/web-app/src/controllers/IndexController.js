@@ -6,6 +6,7 @@ let objIndexController;
 class IndexController {
 
     getTodosIndex(divPortifolios) {
+        console.log("GetTodos");
         let promise = new Promise(function (resolve, reject) {
             let promiseFetch = PortifolioModel.getTodos();
 
@@ -23,19 +24,20 @@ class IndexController {
                 <h5 class="card-title">${servico.descricao}</h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">${servico.detalhes}</p>
+                  <p class="card-text">${servico.detalhes}</p>
                 </div>
-            </div><br/>`;
+              </div><br>`;
             }
 
             divPortifolios.innerHTML = dados;
-        }).catch(response => console.log("Erro catch", response));
+        }).catch(response => console.log("erro catch:", response));
     }
 }
 
 function main() {
     objIndexController = new IndexController();
     objIndexController.getTodosIndex(divPortifolios);
+    console.log("Main");
 }
 
 window.onload = main;
