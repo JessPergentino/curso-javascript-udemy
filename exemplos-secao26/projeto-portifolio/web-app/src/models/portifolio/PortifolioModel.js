@@ -15,7 +15,7 @@ export default class PortifolioModel {
         })
     }
 
-    static getId(id){
+    static getId(id) {
         return fetch(`${caminho}/${id}`).then(response => {
             if (response.status >= 400) {
                 throw new Error("Erro Server");
@@ -50,6 +50,24 @@ export default class PortifolioModel {
                     'Content-Type': 'application/json'
                 },
                 method: "PUT",
+                body: JSON.stringify(objPortifolioClass)
+            }
+        ).then(response => {
+            if (response.status >= 400) {
+                throw new Error("Erro Server");
+            }
+            return response.json();
+        })
+    }
+
+    static deletar(id) {
+        return fetch(`${caminho}/${id}`,
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "DELETE",
                 body: JSON.stringify(objPortifolioClass)
             }
         ).then(response => {

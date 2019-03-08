@@ -175,7 +175,25 @@ class PortifolioController {
     }
 
     deletar(id) {
-        console.log("Deletar", id);
+
+        let promise = new Promise(function (resolve, reject) {
+            let promiseFetch = PortifolioModel.deletar(objPortifolioClass);
+
+            promiseFetch.then(response => {
+                resolve(response);
+            })
+        })
+
+        promise.then(response => {
+            if (response.erro) {
+                this.exibirMsgAlert(response.msg, "erro");
+            } else {
+                objPortifolioController.getTodosTable(divPortifolios);
+                objPortifolioController.exibirMsgAlert(response.msg, "sucesso");
+            }
+        }).catch(response => {
+            console.log("Erro catch", response);
+        });
     };
 
     ocultarElemento(elemento) {
