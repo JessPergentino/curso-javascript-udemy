@@ -73,11 +73,70 @@ class PortifolioController {
     }
 
     prepararEditar(id) {
-        console.log("Preparar Editar", id);
+        let promise = new Promise(function (resolve, reject) {
+            let promiseFetch = PortifolioModel.getId(id);
+
+            promiseFetch.then(response => {
+                resolve(response);
+            })
+        })
+
+        promise.then(response => {
+            if (response.erro) {
+                this.exibirMsgAlert(response.msg, "erro");
+            } else {
+
+                let objPortifolioClass = new PortifolioClass(
+                    response.dados[0].id,
+                    response.dados[0].descricao,
+                    response.dados[0].detalhes);
+
+                formulario.id.value = objPortifolioClass.id;
+                formulario.descricao.value = objPortifolioClass.descricao;
+                formulario.detalhes.value = objPortifolioClass.detalhes;
+
+                objPortifolioController.ocultarElemento("listagem");
+                objPortifolioController.exibirElemento("formulario");
+            }
+        }).catch(response => {
+            console.log("Erro catch", response);
+        });
     };
 
     editar(formulario) {
+        let id, descricao, detalhes;
+        id = formulario.id.value;
+        descricao = formulario.descricao.value;
+        detalhes = formulario.detalhes.value;
 
+        if (id && descricao && detalhes) {
+            let objPortifolioClass = new PortifolioClass(id, descricao, detalhes);
+
+            let promise = new Promise(function (resolve, reject) {
+                let promiseFetch = PortifolioModel.editar(objPortifolioClass);
+
+                promiseFetch.then(response => {
+                    resolve(response);
+                })
+            })
+
+            promise.then(response => {
+                if (response.erro) {
+                    this.exibirMsgAlert(response.msg, "erro");
+                } else {
+                    objPortifolioController.getTodosTable(divPortifolios);
+                    objPortifolioController.exibirMsgAlert(response.msg, "sucesso");
+                    objPortifolioController.ocultarElemento("formulario");
+                    objPortifolioController.exibirElemento("listagem");
+                    objPortifolioController.limparCamposForm(formulario);
+                }
+            }).catch(response => {
+                console.log("Erro catch", response);
+            });
+
+        } else {
+            this.exibirMsgAlert("Por favor preencher todos os campos.", "erro")
+        }
     }
 
     adicionar(formulario) {
@@ -106,15 +165,13 @@ class PortifolioController {
                     objPortifolioController.exibirElemento("listagem");
                     objPortifolioController.limparCamposForm(formulario);
                 }
-            }).catch(response =>{
+            }).catch(response => {
                 console.log("Erro catch", response);
             });
 
         } else {
             this.exibirMsgAlert("Por favor preencher todos os campos.", "erro")
         }
-
-
     }
 
     deletar(id) {
