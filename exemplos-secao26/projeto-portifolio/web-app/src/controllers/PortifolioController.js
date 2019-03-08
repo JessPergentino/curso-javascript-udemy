@@ -2,8 +2,8 @@ import PortifolioModel from "../models/portifolio/PortifolioModel";
 import PortifolioClass from "../models/portifolio/PortifolioClass";
 
 let divMsg = window.document.getElementById("msg");
-let divPortifolios = window.document.getElementById("listagem");
-let divFormulario = window.document.getElementById("formulario");
+let divPortifolios = window.document.getElementById("portifolios");
+let formulario = window.document.getElementById("form");
 
 let objPortifolioController;
 
@@ -25,7 +25,6 @@ class PortifolioController {
             if (response.erro) {
                 this.exibirMsgAlert(response.msg, "erro");
             } else {
-
                 dados += `<div class="table-responsive">
                         <table class= "table table-striped table-bordered table-hover table-sm">
                             <thead class="table-dark">
@@ -49,10 +48,78 @@ class PortifolioController {
 
                 dados += "</tbody></table></div>";
                 divPortifolios.innerHTML = dados;
+
+                let btnsEditar = document.querySelectorAll(".btn-editar");
+                let btnsExcluir = document.querySelectorAll(".btn-excluir");
+
+                btnsEditar.forEach(function (item) {
+                    item.addEventListener("click", event => {
+                        objPortifolioController.limparMsgAlert();
+                        let id = event.target.getAttribute('data-id');
+                        objPortifolioController.prepararEditar(id);
+                    });
+                })
+
+                btnsExcluir.forEach(function (item) {
+                    item.addEventListener("click", event => {
+                        objPortifolioController.limparMsgAlert();
+                        let id = event.target.getAttribute('data-id');
+                        objPortifolioController.deletar(id);
+                    });
+                })
             }
 
         }).catch(response => console.log("erro catch:", response));
     }
+
+    prepararEditar(id) {
+        console.log("Preparar Editar", id);
+    };
+
+    editar(formulario) {
+
+    }
+
+    adicionar(formulario) {
+        let descricao, detalhes;
+        descricao = formulario.descricao.value;
+        detalhes = formulario.detalhes.value;
+
+        if (descricao && detalhes) {
+            let objPortifolioClass = new PortifolioClass(null, descricao, detalhes);
+
+            let promise = new Promise(function (resolve, reject) {
+                let promiseFetch = PortifolioModel.adicionar(objPortifolioClass);
+
+                promiseFetch.then(response => {
+                    resolve(response);
+                })
+            })
+
+            promise.then(response => {
+                if (response.erro) {
+                    this.exibirMsgAlert(response.msg, "erro");
+                } else {
+                    objPortifolioController.getTodosTable(divPortifolios);
+                    objPortifolioController.exibirMsgAlert(response.msg, "sucesso");
+                    objPortifolioController.ocultarElemento("formulario");
+                    objPortifolioController.exibirElemento("listagem");
+                    objPortifolioController.limparCamposForm(formulario);
+                }
+            }).catch(response =>{
+                console.log("Erro catch", response);
+            });
+
+        } else {
+            this.exibirMsgAlert("Por favor preencher todos os campos.", "erro")
+        }
+
+
+    }
+
+    deletar(id) {
+        console.log("Deletar", id);
+    };
 
     ocultarElemento(elemento) {
         document.getElementById(elemento).style.display = "none";
@@ -65,8 +132,8 @@ class PortifolioController {
 
     limparCamposForm(form) {
         form.id.value = "";
-        form.descricao = "";
-        form.detalhes = "";
+        form.descricao.text = "";
+        form.detalhes.text = "";
     }
 
     exibirMsgAlert(msg, tipo) {
@@ -91,7 +158,32 @@ class PortifolioController {
     }
 
     registrarEvents() {
+        document.getElementById('btn-exibir-formulario').addEventListener('click', function () {
+            objPortifolioController.limparMsgAlert();
+            objPortifolioController.ocultarElemento('listagem');
+            objPortifolioController.exibirElemento('formulario');
+        })
 
+        document.getElementById('btn-cadastrar-portifolio').addEventListener('click', function () {
+            event.preventDefault();
+            objPortifolioController.limparMsgAlert();
+            if (formulario.id.value) {
+                objPortifolioController.editar(formulario);
+            } else {
+                objPortifolioController.adicionar(formulario);
+            }
+        })
+
+        document.getElementById('btn-cancelar-operacao').addEventListener('click', function () {
+            objPortifolioController.limparMsgAlert();
+            objPortifolioController.limparCamposForm(formulario);
+            objPortifolioController.ocultarElemento('formulario');
+            objPortifolioController.exibirElemento('listagem');
+        })
+    }
+
+    limparMsgAlert() {
+        divMsg.innerHTML = "";
     }
 }
 
@@ -99,6 +191,7 @@ function main() {
     objPortifolioController = new PortifolioController();
     objPortifolioController.ocultarElemento("formulario");
     objPortifolioController.getTodosTable(divPortifolios);
+    objPortifolioController.registrarEvents();
     console.log("Main");
 }
 
