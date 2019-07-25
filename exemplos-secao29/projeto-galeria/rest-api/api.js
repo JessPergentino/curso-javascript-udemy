@@ -7,6 +7,8 @@ const port = 3000;
 
 const router = express.Router();
 
+const galeriaRouter = require('./router/galeriaRouter')
+
 api.use(cors());
 
 api.use(bodyparser.urlencoded({ extended: true }));
@@ -19,6 +21,7 @@ router.get('/', (req, resp) => {
 });
 
 api.use('/', router);
+api.use('/galeria', galeriaRouter);
 
 api.listen(port);
 console.log('Run API Express');
